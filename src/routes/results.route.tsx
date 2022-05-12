@@ -6,24 +6,26 @@ import { HolidayCardComponent } from '../components/holiday-card.component';
 import { doRequest } from '../services/http';
 import { BookingRequest, BookingResponse, Holiday } from '../types/booking';
 import * as styles from './results.module.less'
+import { DateTime } from 'luxon';
 
 export default function ResultsRoute(): JSX.Element {
     const [ searchParams ] = useRouter();
     const [ results, setResults ] = useState<BookingResponse| null>(null)
     const [loading, setLoading] = useState<boolean>(true)
 
+
     useEffect(() => {
+        const departureDate = DateTime.fromFormat(searchParams?.matches?.departureDate, "yyyy-MM-dd").toFormat("dd-MM-yyyy");
         const requestBody: BookingRequest = {
             "bookingType": "holiday",
-            "path" :"holiday",
-            "location" :"maldives",
-            "departureDate" :"09-06-2022",
-            "duration": 7,
+            "location": searchParams?.matches?.location,
+            "departureDate": departureDate,
+            "duration": searchParams?.matches?.duration,
             "gateway" :"LHR",
-            "direct":false,
+            "direct": false,
             "partyCompositions": [
                 {
-                    "adults": 2,
+                    "adults": searchParams?.matches?.adults,
                     "childAges": [],
                     "infants": 0
                 }
@@ -37,7 +39,11 @@ export default function ResultsRoute(): JSX.Element {
           })
           .catch(e => console.error(e))
           .finally(() => console.info('results'))
-      }, [])
+      }, [searchParams])
+
+      useEffect(() => {
+        setLoading(true)
+      }, [searchParams])
 
     return (
         <section>

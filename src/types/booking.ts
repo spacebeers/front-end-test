@@ -1,5 +1,5 @@
 export interface PartyComposition {
-    adults: number
+    adults: number | string
     childAges: number[]
     infants: number
 }
@@ -8,7 +8,8 @@ export interface BookingRequest {
     bookingType: string
     location: string
     departureDate: string
-    duration: number
+    gateway: string
+    duration: number | string
     partyCompositions: PartyComposition[]
 }
 
@@ -36,7 +37,7 @@ export interface Hotel {
 
 export interface HotelContent {
    name: string
-   vRating: number | string
+   vRating: string
    hotelDescription: string
    atAGlance: string[]
    parentLocation: string
@@ -46,7 +47,7 @@ export interface HotelContent {
    hotelLocation: string[]
    accommodationType: string[]
    hotelFacilities: string[]
-   starRating: number | string
+   starRating: string
    propertyType: string
 }
 

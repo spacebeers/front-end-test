@@ -4,6 +4,7 @@ import { Holiday } from '../types/booking';
 import { CurrencyComponent } from './currency.component';
 import * as styles from './holiday-card.module.less'
 import ImageComponent from './image.component';
+import { RatingComponent } from './rating.component';
 
 
 type HolidayCardProps = {
@@ -19,7 +20,7 @@ export const HolidayCardComponent = (props: HolidayCardProps) => {
       <h2>{ props?.holiday?.hotel?.name } </h2>
 
       <ul>
-        <li>Rating: { props?.holiday?.hotel?.content?.starRating }</li>
+        <li>Rating: <RatingComponent rating={props?.holiday?.hotel?.content?.starRating} /></li>
         <li>Price: <CurrencyComponent price={props?.holiday?.totalPrice} /></li>
       </ul>
     </div>
