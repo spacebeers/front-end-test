@@ -1,0 +1,29 @@
+@import (reference) "../less/styled-components.include.less";
+
+@transition-speed: 0.3s;
+@transition-easing: ease-in-out;
+
+.text-component {
+  text-align: center;
+  border: none;
+  background: @virgin-red;
+  color: @white;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: background-color @transition-speed @transition-easing, color @transition-speed @transition-easing;
+
+  
+  &[class][disabled] {
+    cursor: default;
+  }
+
+  &:hover {
+  }
+
+  &:focus {
+  }
+
+  &:active {
+  }
+}

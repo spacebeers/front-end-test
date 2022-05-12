@@ -1,0 +1,13 @@
+@import (reference) "../less/styled-components.include.less";
+
+@transition-speed: 0.3s;
+@transition-easing: ease-in-out;
+
+.number-component {
+  border-radius: 4px;
+  transition: background-color @transition-speed @transition-easing, color @transition-speed @transition-easing;
+
+  &[class][disabled] {
+    cursor: default;
+  }
+}

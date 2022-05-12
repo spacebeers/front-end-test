@@ -1,9 +1,64 @@
 import { h, JSX } from 'preact'
+import { useRouter } from "preact-router";
+import { useEffect, useState } from 'preact/hooks';
+import SearchComponent from '../components/search.component';
+import { HolidayCardComponent } from '../components/holiday-card.component';
+import { doRequest } from '../services/http';
+import { BookingRequest, BookingResponse, Holiday } from '../types/booking';
+import * as styles from './results.module.less'
 
 export default function ResultsRoute(): JSX.Element {
+    const [ searchParams ] = useRouter();
+    const [ results, setResults ] = useState<BookingResponse| null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
+
+    useEffect(() => {
+        const requestBody: BookingRequest = {
+            "bookingType": "holiday",
+            "path" :"holiday",
+            "location" :"maldives",
+            "departureDate" :"09-06-2022",
+            "duration": 7,
+            "gateway" :"LHR",
+            "direct":false,
+            "partyCompositions": [
+                {
+                    "adults": 2,
+                    "childAges": [],
+                    "infants": 0
+                }
+            ]
+        }
+
+        doRequest('POST', '/cjs-search-api/search', requestBody)
+          .then((response: BookingResponse) => {
+              setResults(response);
+              setLoading(false)
+          })
+          .catch(e => console.error(e))
+          .finally(() => console.info('results'))
+      }, [])
+
     return (
         <section>
-           <h1>Results</h1>
+            <SearchComponent />
+
+            <section>
+                {
+                    loading ?
+                        <h1>Loading</h1>
+                    :
+                        <section>
+                            <h1>Showing [{results?.holidays?.length}] Holidays</h1>
+
+                            <section className={styles['holiday-grid']}>
+                                {
+                                    results?.holidays?.map((holiday: Holiday) => <HolidayCardComponent holiday={holiday} />)
+                                }
+                            </section>
+                        </section>
+                }
+            </section>
         </section>
     )
 }

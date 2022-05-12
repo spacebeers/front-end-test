@@ -19,18 +19,20 @@
   "@parcel/transformer-css": {
     "cssModules": true
   },
+  "sourceMap": "inline",
   "homepage": "https://github.com/virginatlanticdevelopment/front-end-test#readme",
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
-    "@testing-library/preact": "^2.0.1",
     "@parcel/transformer-less": "^2.0.0",
     "@parcel/transformer-raw": "^2.0.0",
     "@parcel/transformer-typescript-tsc": "^2.0.0",
     "@parcel/validator-typescript": "^2.0.0",
+    "@testing-library/preact": "^2.0.1",
     "@types/jest": "^25.1.0",
+    "@types/luxon": "^2.3.2",
     "@types/node": "^13.13.9",
     "autoprefixer": "^9.7.4",
     "enzyme": "^3.11.0",
@@ -61,6 +63,7 @@
     "dotenv": "^8.2.0",
     "es6-promise": "^4.2.8",
     "identity-obj-proxy": "^3.0.0",
+    "luxon": "^2.4.0",
     "preact": "10.5.10",
     "preact-async-route": "^2.2.1",
     "preact-router": "^4.0.1"
