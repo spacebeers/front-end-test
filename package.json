@@ -61,7 +61,9 @@
     "dotenv": "^8.2.0",
     "es6-promise": "^4.2.8",
     "identity-obj-proxy": "^3.0.0",
-    "preact": "10.5.10"
+    "preact": "10.5.10",
+    "preact-async-route": "^2.2.1",
+    "preact-router": "^4.0.1"
   },
   "alias": {
     "react": "preact/compat",
