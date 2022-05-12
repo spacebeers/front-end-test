@@ -17,26 +17,28 @@ export default function SearchComponent(): JSX.Element {
   }
 
   return (
-    <section className={`${styles['search-form']}`}>
-      <form onSubmit={onSubmit}>
-        <div className={styles["grid"]}>
-          <div className={styles["col"]}>
-            <SelectComponent name="location" label="Destination" id="location_field" value={searchParams?.matches?.location || ""} options={LOCATIONS} required={true} />
-          </div>
-          <div className={styles["col"]}>
-            <DateComponent name="departureDate" label="Date" id="departureDate" value={searchParams?.matches?.departureDate} required={true} />
-          </div>
-          <div className={styles["col"]}>
-            <NumberComponent name="duration" label="Duration" id="duration_field" min={1} max={31} value={searchParams?.matches?.duration || 7} required={true} />
-          </div>
-          <div className={styles["col"]}>
-            <NumberComponent name="adults" label="Adults" id="adults_field" min={1} max={9} value={searchParams?.matches?.adults || 2} required={true} />
-          </div>
-          <div className={styles["col"]}>
-            <ButtonComponent text="Search" type="SUBMIT" />
-          </div>
-        </div>        
-      </form>
+    <section className={`${styles['search-form']} full-bleed`}>
+      <div className="wrapper">
+        <form onSubmit={onSubmit}>
+          <div className={styles["grid"]}>
+            <div className={styles["col"]}>
+              <SelectComponent name="location" label="Destination" id="location_field" value={searchParams?.matches?.location || ""} options={LOCATIONS} required={true} />
+            </div>
+            <div className={styles["col"]}>
+              <DateComponent name="departureDate" label="Date" id="departureDate" value={searchParams?.matches?.departureDate} required={true} />
+            </div>
+            <div className={styles["col"]}>
+              <NumberComponent name="duration" label="Duration" id="duration_field" min={1} max={31} value={searchParams?.matches?.duration || 7} required={true} />
+            </div>
+            <div className={styles["col"]}>
+              <NumberComponent name="adults" label="Adults" id="adults_field" min={1} max={9} value={searchParams?.matches?.adults || 2} required={true} />
+            </div>
+            <div className={styles["col"]}>
+              <ButtonComponent text="Search" type="SUBMIT" />
+            </div>
+          </div>        
+        </form>
+      </div>
     </section>
   )
 }

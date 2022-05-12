@@ -22,7 +22,6 @@ export default function ResultsRoute(): JSX.Element {
             "departureDate": departureDate,
             "duration": searchParams?.matches?.duration,
             "gateway" :"LHR",
-            "direct": false,
             "partyCompositions": [
                 {
                     "adults": searchParams?.matches?.adults,
@@ -57,10 +56,13 @@ export default function ResultsRoute(): JSX.Element {
                         <section>
                             <h1>Showing [{results?.holidays?.length}] Holidays</h1>
 
-                            <section className={styles['holiday-grid']}>
-                                {
-                                    results?.holidays?.map((holiday: Holiday) => <HolidayCardComponent holiday={holiday} />)
-                                }
+                            <section className={styles['holiday-results']}>
+                                <aside>Filters</aside>
+                                <section className={styles['holiday-grid']}>
+                                    {
+                                        results?.holidays?.map((holiday: Holiday) => <HolidayCardComponent holiday={holiday} />)
+                                    }
+                                </section>
                             </section>
                         </section>
                 }
