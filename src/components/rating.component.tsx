@@ -11,7 +11,6 @@ export const RatingComponent = (props: RatingProps) => {
     const cleaned: number = stringToNumber(props?.rating);
     const isRating: number = isNaN(cleaned) ? 0 : cleaned
     const rating: Array<undefined> = Array.apply(null, Array(isRating));
-    console.log(rating)
     return (
         <span className={styles['rating']} aria-label={`This hotel has a rating of ${isRating}`}>
             {
