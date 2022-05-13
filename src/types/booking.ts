@@ -17,6 +17,8 @@ export interface BookingResponse {
     holidays: Holiday[]
 }
 
+export type HolidayFilters = string[]
+
 export interface Holiday {
     totalPrice: number
     pricePerPerson: number

@@ -1,7 +1,7 @@
 @import (reference) "../less/styled-components.include.less";
 
 .search-form {
-  background: white;
+  background: @speakers;
   box-shadow: inset 0px -1px 0px #DEDFE1;
   position: relative;
   padding: 16px 0;
@@ -10,12 +10,11 @@
 .grid {
   display: grid;
   align-items: end;
-  padding: 20px 10px;
+  padding: 20px 0;
   grid-template-columns: repeat(6, 1fr);
   @media (min-width: @screen-md-min) {
     grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
   }
-  //grid-auto-rows: 40px;
   grid-gap: 16px;
   
   .col {

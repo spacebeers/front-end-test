@@ -3,16 +3,19 @@ import { useRouter } from "preact-router";
 import { useEffect, useState } from 'preact/hooks';
 import SearchComponent from '../components/search.component';
 import { HolidayCardComponent } from '../components/holiday-card.component';
-import { doRequest } from '../services/http';
-import { BookingRequest, BookingResponse, Holiday } from '../types/booking';
+import { doRequest } from '../services/http.service';
+import { filterResults } from '../services/filter.service';
+import { BookingRequest, BookingResponse, Holiday, HolidayFilters } from '../types/booking';
 import * as styles from './results.module.less'
 import { DateTime } from 'luxon';
+import { FilterComponent } from '../components/filter.component';
 
 export default function ResultsRoute(): JSX.Element {
     const [searchParams] = useRouter();
     const [results, setResults] = useState<BookingResponse | null>(null)
+    const [resultSet, setResultSet] = useState<BookingResponse | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
-
+    const [filters, setFilters] = useState<HolidayFilters>([])
 
     useEffect(() => {
         const departureDate = DateTime.fromFormat(searchParams?.matches?.departureDate, "yyyy-MM-dd").toFormat("dd-MM-yyyy");
@@ -33,16 +36,22 @@ export default function ResultsRoute(): JSX.Element {
 
         doRequest('POST', '/cjs-search-api/search', requestBody)
             .then((response: BookingResponse) => {
+                setResultSet(response);
                 setResults(response);
                 setLoading(false)
             })
             .catch(e => console.error(e))
-            .finally(() => console.info('results'))
+            .finally(() => console.info(results))
     }, [searchParams])
 
     useEffect(() => {
         setLoading(true)
     }, [searchParams])
+
+    useEffect(() => {
+        const filtered = filterResults(resultSet, filters)    
+        setResults(filtered)
+    }, [filters])
 
     return (
         <section>
@@ -57,7 +66,9 @@ export default function ResultsRoute(): JSX.Element {
                                 <h1>Showing [{results?.holidays?.length}] Holidays</h1>
 
                                 <section className={styles['holiday-results']}>
-                                    <aside>Filters</aside>
+                                    <aside>
+                                        <FilterComponent holidays={resultSet?.holidays} filters={filters} onChange={(data) => setFilters(data)} />
+                                    </aside>
                                     <section className={styles['holiday-grid']}>
                                         {
                                             results?.holidays?.map((holiday: Holiday) => <HolidayCardComponent holiday={holiday} />)
