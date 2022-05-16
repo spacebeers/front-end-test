@@ -1,17 +1,20 @@
 /** @jsx h */
 import { h, options } from 'preact';
-import { Holiday } from '../types/booking';
+import { Holiday, HolidayFilters } from '../types/booking';
+import { cleanFacilityFilter } from '../services/filter.service';
 import { CurrencyComponent } from './currency.component';
 import * as styles from './holiday-card.module.less'
 import ImageComponent from './image.component';
 import { RatingComponent } from './rating.component';
 
-
 type HolidayCardProps = {
   holiday: Holiday
+  filters: HolidayFilters
 }
 
 export const HolidayCardComponent = (props: HolidayCardProps) => {
+  const facilities = props?.filters?.map(item => cleanFacilityFilter(item))
+
   return (
     <div className={styles['card-component']}>
       <div className={styles["image"]}>
@@ -26,7 +29,7 @@ export const HolidayCardComponent = (props: HolidayCardProps) => {
       </div>
       <div className={styles["footer"]}>
         {
-          props?.holiday?.hotel?.content?.hotelFacilities?.map((facility: string) => <span className={styles['tag']}>{facility}</span>)
+          props?.holiday?.hotel?.content?.hotelFacilities?.map((facility: string) => <span className={`${styles['tag']} ${facilities.includes(facility) ? styles['filtered'] : ""}`}>{facility}</span>)
         }
       </div>      
     </div>

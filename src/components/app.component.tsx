@@ -2,9 +2,7 @@ import { h, JSX } from 'preact'
 import Router, { Route } from 'preact-router';
 import AsyncRoute from 'preact-async-route';
 import HeaderComponent from './header.component'
-import SearchComponent from './search.component'
 import HomeRoute from '../routes/home.route';
-
 
 export default function App(): JSX.Element {
     return (

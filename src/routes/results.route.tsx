@@ -71,7 +71,10 @@ export default function ResultsRoute(): JSX.Element {
                                     </aside>
                                     <section className={styles['holiday-grid']}>
                                         {
-                                            results?.holidays?.map((holiday: Holiday) => <HolidayCardComponent holiday={holiday} />)
+                                            results?.holidays?.length === 0 ?
+                                                <h2>No results</h2>
+                                            :
+                                                results?.holidays?.map((holiday: Holiday) => <HolidayCardComponent holiday={holiday} filters={filters} />)
                                         }
                                     </section>
                                 </section>

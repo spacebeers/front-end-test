@@ -2,7 +2,7 @@
 import { h } from 'preact';
 import * as styles from './number.module.less'
 
-type ButtonProps = {
+type NumberProps = {
   label: string
   name: string
   id: string
@@ -12,7 +12,7 @@ type ButtonProps = {
   required?: boolean
 }
 
-export const NumberComponent = (props: ButtonProps) => {
+export const NumberComponent = (props: NumberProps) => {
   return (
     <div className={styles['number-component']}>
       <label for={props?.id}>

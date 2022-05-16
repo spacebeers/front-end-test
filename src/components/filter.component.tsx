@@ -1,6 +1,7 @@
 /** @jsx h */
 import { h, options } from 'preact';
 import { Holiday, HolidayFilters } from '../types/booking';
+import { ButtonComponent } from './button.component';
 import { CheckboxComponent } from './checkbox.component';
 import * as styles from './filter.module.less'
 
@@ -19,7 +20,7 @@ export const FilterComponent = (props: FilterProps) => {
 
   const onSubmit = (e: SubmitEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target as HTMLFormElement);
     const data: HolidayFilters = Array.from(formData.entries())?.map(entry => entry[0])
     props?.onChange(data)
   }
@@ -52,7 +53,8 @@ export const FilterComponent = (props: FilterProps) => {
           })
         }
 
-        <button>Submit</button>
+        <ButtonComponent text="Filter" type="SUBMIT" />
+        <ButtonComponent text="Reset" type="RESET" skin="SECONDARY" />
       </form>
     </div>
   );

@@ -9,7 +9,7 @@ export type Option = {
   description: string
 }
 
-type SelectProps = {
+type DateComponentProps = {
   label: string
   name: string
   id: string
@@ -17,7 +17,7 @@ type SelectProps = {
   value?: string
 }
 
-export const DateComponent = (props: SelectProps) => {
+export const DateComponent = (props: DateComponentProps) => {
   const format: string = "yyyy-MM-dd";
   const min = DateTime.now().plus({ days: 3}).toFormat(format);
   const max = DateTime.now().plus({ months: 12}).toFormat(format);

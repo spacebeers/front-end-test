@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-preact-pure';
-import { RatingComponent } from './rating.component';
+import { RatingComponent, stringToNumber } from './rating.component';
 
 configure({ adapter: new Adapter })
 
@@ -20,3 +20,22 @@ describe('RatingComponent', () => {
         expect(rating_component.find('svg').length).toBe(0)
     })
 })
+
+describe('stringToNumber', () => {
+    it('stringToNumber("test") should be true', () => {
+        expect(stringToNumber("test")).toBe(NaN);
+    });
+
+    it('stringToNumber("1000") should be true', () => {
+        expect(stringToNumber("1000")).toBe(1000);
+    });
+
+    it('stringToNumber("1000abc") should be true', () => {
+        expect(stringToNumber("1000abc")).toBe(1000);
+    });
+
+    it('stringToNumber("abc1000") should be true', () => {
+        expect(stringToNumber("abc1000")).toBe(NaN);
+    });
+});
+
